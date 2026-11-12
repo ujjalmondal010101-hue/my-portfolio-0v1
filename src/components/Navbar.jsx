@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import ThemeToggle from './ThemeToggle.jsx'
 import { profile } from '../data.js'
 
 const links = [
   { href: '#about', label: 'About' },
   { href: '#skills', label: 'Skills' },
   { href: '#work', label: 'My Work' },
+  { href: '#games', label: 'Games' },
   { href: '#journey', label: 'Journey' },
   { href: '#contact', label: 'Contact' },
 ]
@@ -37,6 +39,9 @@ export default function Navbar() {
               </a>
             </li>
           ))}
+          <li>
+            <ThemeToggle />
+          </li>
           <li>
             <a
               className="nav-cta"

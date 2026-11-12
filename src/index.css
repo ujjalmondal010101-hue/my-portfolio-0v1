@@ -1,9 +1,11 @@
 /* ─────────────────────────────
    Ujjal Mondal — Portfolio styles
-   Colorful & creative theme
+   Colorful & creative · light/dark themes
    ───────────────────────────── */
 
 :root {
+  color-scheme: light;
+
   --violet: #7c3aed;
   --pink: #ec4899;
   --orange: #f97316;
@@ -11,10 +13,36 @@
   --blue: #3b82f6;
   --red: #ff3d55;
 
-  --ink: #241b3a;
-  --muted: #6f6787;
+  /* Light theme surfaces & text */
   --bg: #fffaf2;
   --card: #ffffff;
+  --ink: #241b3a;
+  --text-soft: #4a4363;
+  --muted: #6f6787;
+  --nav-bg: rgba(255, 255, 255, 0.82);
+  --border: rgba(124, 58, 237, 0.14);
+
+  /* Soft pastel tints behind cards */
+  --tint-violet: #f3ecff;
+  --tint-pink: #ffeaf4;
+  --tint-orange: #fff1e4;
+  --tint-green: #e9fbf0;
+  --tint-blue: #eaf2ff;
+
+  --tag-bg: rgba(124, 58, 237, 0.1);
+  --tag-ink: #7c3aed;
+  --accent-text: #7c3aed;
+  --timeline-line: rgba(124, 58, 237, 0.35);
+  --dot-ring: rgba(124, 58, 237, 0.15);
+  --chip-bg: rgba(124, 58, 237, 0.08);
+
+  --section-tint: linear-gradient(
+    180deg,
+    transparent,
+    rgba(124, 58, 237, 0.05) 30%,
+    rgba(236, 72, 153, 0.05) 70%,
+    transparent
+  );
 
   --radius: 22px;
   --shadow: 0 20px 45px -22px rgba(76, 29, 149, 0.35);
@@ -22,21 +50,70 @@
   --grad: linear-gradient(120deg, #7c3aed, #ec4899 55%, #f97316);
 }
 
+html[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #171029;
+  --card: #241a3f;
+  --ink: #f2ecff;
+  --text-soft: #cbc0e8;
+  --muted: #a496c8;
+  --nav-bg: rgba(30, 21, 54, 0.78);
+  --border: rgba(255, 255, 255, 0.1);
+
+  --tint-violet: #2b2049;
+  --tint-pink: #351c33;
+  --tint-orange: #362417;
+  --tint-green: #17301f;
+  --tint-blue: #182338;
+
+  --tag-bg: rgba(236, 72, 153, 0.18);
+  --tag-ink: #f9a8d4;
+  --accent-text: #b8a2f8;
+  --red: #ff7285;
+  --timeline-line: rgba(167, 139, 250, 0.4);
+  --dot-ring: rgba(167, 139, 250, 0.2);
+  --chip-bg: rgba(255, 255, 255, 0.08);
+
+  --section-tint: linear-gradient(
+    180deg,
+    transparent,
+    rgba(236, 72, 153, 0.06) 30%,
+    rgba(124, 58, 237, 0.08) 70%,
+    transparent
+  );
+
+  --shadow: 0 22px 48px -20px rgba(0, 0, 0, 0.65);
+  --shadow-soft: 0 14px 32px -18px rgba(0, 0, 0, 0.55);
+}
+
 * {
   box-sizing: border-box;
 }
 
+/* Lock horizontal overflow on every device — the page must
+   only ever scroll up and down */
 html {
-  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  width: 100%;
+  position: relative;
   font-family: 'Outfit', system-ui, -apple-system, sans-serif;
   background: var(--bg);
   color: var(--ink);
   line-height: 1.65;
   overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+@supports (overflow-x: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
 }
 
 img {
@@ -103,12 +180,45 @@ h3 {
 }
 
 .btn-ghost {
-  border: 2px solid rgba(124, 58, 237, 0.35);
-  color: var(--violet);
+  border: 2px solid var(--border);
+  color: var(--accent-text);
 }
 
 .btn-ghost:hover {
-  border-color: var(--violet);
+  border-color: var(--accent-text);
+}
+
+/* ── Theme toggle ────────────── */
+
+.theme-toggle {
+  width: 54px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--grad);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.theme-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.theme-toggle.dark .theme-knob {
+  transform: translateX(24px);
+  background: #241b3a;
 }
 
 /* ── Navbar ──────────────────── */
@@ -126,9 +236,9 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.82);
+  background: var(--nav-bg);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(124, 58, 237, 0.14);
+  border: 1px solid var(--border);
   border-radius: 999px;
   padding: 10px 24px;
   box-shadow: var(--shadow-soft);
@@ -151,8 +261,9 @@ h3 {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 22px;
   font-weight: 500;
+  font-size: 0.97rem;
 }
 
 .nav-links a {
@@ -190,6 +301,9 @@ h3 {
 .hero {
   padding: 160px 0 90px;
   position: relative;
+  /* Contains the decorative blobs & floating chips so nothing
+     can ever push the page sideways */
+  overflow: hidden;
 }
 
 .hero::before {
@@ -254,7 +368,7 @@ h3 {
   font-family: 'Caveat', cursive;
   font-size: clamp(1.5rem, 3vw, 1.9rem);
   font-weight: 700;
-  color: var(--violet);
+  color: var(--accent-text);
   margin: 10px 0 14px;
 }
 
@@ -310,7 +424,7 @@ h3 {
 
 .float-chip {
   position: absolute;
-  background: #fff;
+  background: var(--card);
   padding: 8px 16px;
   border-radius: 999px;
   font-weight: 600;
@@ -357,16 +471,11 @@ h3 {
 
 .section {
   padding: 92px 0;
+  position: relative;
 }
 
 .section-tint {
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(124, 58, 237, 0.05) 30%,
-    rgba(236, 72, 153, 0.05) 70%,
-    transparent
-  );
+  background: var(--section-tint);
 }
 
 .section-head {
@@ -389,6 +498,17 @@ h3 {
   letter-spacing: -0.5px;
 }
 
+.section-sub {
+  color: var(--muted);
+  max-width: 540px;
+  margin: 12px auto 0;
+  font-size: 1.02rem;
+}
+
+.section-sub strong {
+  color: var(--accent-text);
+}
+
 /* ── About ───────────────────── */
 
 .about-grid {
@@ -401,7 +521,7 @@ h3 {
 .about-text p {
   margin: 0 0 18px;
   font-size: 1.06rem;
-  color: #4a4363;
+  color: var(--text-soft);
 }
 
 .fact-list li {
@@ -440,7 +560,8 @@ h3 {
 
 .skill-card {
   --accent: var(--violet);
-  background: var(--card);
+  --tint: var(--tint-violet);
+  background: linear-gradient(165deg, var(--card) 30%, var(--tint));
   border-top: 5px solid var(--accent);
   border-radius: var(--radius);
   padding: 26px 24px;
@@ -455,27 +576,27 @@ h3 {
 
 .tone-violet {
   --accent: var(--violet);
-  background: linear-gradient(165deg, #fff 30%, #f3ecff);
+  --tint: var(--tint-violet);
 }
 
 .tone-pink {
   --accent: var(--pink);
-  background: linear-gradient(165deg, #fff 30%, #ffeaf4);
+  --tint: var(--tint-pink);
 }
 
 .tone-orange {
   --accent: var(--orange);
-  background: linear-gradient(165deg, #fff 30%, #fff1e4);
+  --tint: var(--tint-orange);
 }
 
 .tone-green {
   --accent: var(--green);
-  background: linear-gradient(165deg, #fff 30%, #e9fbf0);
+  --tint: var(--tint-green);
 }
 
 .tone-blue {
   --accent: var(--blue);
-  background: linear-gradient(165deg, #fff 30%, #eaf2ff);
+  --tint: var(--tint-blue);
 }
 
 .skill-emoji {
@@ -539,8 +660,8 @@ h3 {
   text-transform: uppercase;
   padding: 5px 13px;
   border-radius: 999px;
-  background: rgba(124, 58, 237, 0.1);
-  color: var(--violet);
+  background: var(--tag-bg);
+  color: var(--tag-ink);
   margin-bottom: 16px;
 }
 
@@ -578,7 +699,7 @@ h3 {
 }
 
 .work-link:hover {
-  color: #ff6b80;
+  opacity: 0.85;
 }
 
 .arrow {
@@ -590,6 +711,213 @@ h3 {
   transform: translateX(5px);
 }
 
+/* ── Mini Games ──────────────── */
+
+.games-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.games-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.games-tab {
+  padding: 11px 24px;
+  border-radius: 999px;
+  border: 2px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.games-tab:hover {
+  transform: translateY(-2px);
+  border-color: var(--violet);
+}
+
+.games-tab.active {
+  background: var(--grad);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 12px 28px -10px rgba(236, 72, 153, 0.55);
+}
+
+.game-panel {
+  background: var(--card);
+  border-radius: 26px;
+  padding: 34px 28px;
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.game-players {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.player-chip {
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: var(--chip-bg);
+}
+
+.vs {
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Tic-tac-toe board */
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 88px);
+  gap: 10px;
+  justify-content: center;
+  margin: 24px auto 20px;
+}
+
+.cell {
+  width: 88px;
+  height: 88px;
+  border-radius: 18px;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  font-size: 2.1rem;
+  font-family: inherit;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform 0.15s ease, border-color 0.2s ease;
+}
+
+.cell:hover:enabled {
+  transform: scale(1.07);
+  border-color: var(--violet);
+}
+
+.cell:disabled {
+  cursor: default;
+}
+
+/* Rock-paper-scissors */
+
+.score-board {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 26px;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.score-board strong {
+  color: var(--ink);
+  font-size: 1.25rem;
+  margin-left: 6px;
+}
+
+.rps-hands {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  margin: 18px 0 8px;
+  min-height: 100px;
+}
+
+.rps-hand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.rps-hand > span {
+  font-size: 3.4rem;
+  line-height: 1;
+}
+
+.rps-hand small {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.rps-vs {
+  font-size: 1.6rem;
+}
+
+.rps-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 14px 0 20px;
+}
+
+.rps-btn {
+  width: 78px;
+  height: 78px;
+  font-size: 2.1rem;
+  border-radius: 22px;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.2s ease;
+}
+
+.rps-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  border-color: var(--pink);
+}
+
+/* Shared game bits */
+
+.game-message {
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-text);
+  min-height: 44px;
+  margin: 0 0 10px;
+}
+
+.reset-btn {
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: 2px solid var(--border);
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.reset-btn:hover {
+  border-color: var(--violet);
+  transform: translateY(-2px);
+}
+
 /* ── Journey timeline ────────── */
 
 .timeline {
@@ -597,7 +925,7 @@ h3 {
   max-width: 720px;
   margin: 0 auto;
   padding-left: 34px;
-  border-left: 3px dashed rgba(124, 58, 237, 0.35);
+  border-left: 3px dashed var(--timeline-line);
 }
 
 .tl-item {
@@ -622,8 +950,8 @@ h3 {
   height: 17px;
   border-radius: 50%;
   background: var(--grad);
-  border: 3px solid #fff;
-  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 4px var(--dot-ring);
 }
 
 .tl-time {
@@ -701,7 +1029,7 @@ h3 {
   padding: 30px 0;
   text-align: center;
   color: var(--muted);
-  border-top: 1px dashed rgba(124, 58, 237, 0.25);
+  border-top: 1px dashed var(--border);
   font-size: 0.95rem;
 }
 
@@ -758,11 +1086,11 @@ h3 {
     top: calc(100% + 10px);
     left: 0;
     right: 0;
-    background: #fff;
+    background: var(--card);
     border-radius: 22px;
     padding: 16px;
     box-shadow: var(--shadow);
-    border: 1px solid rgba(124, 58, 237, 0.14);
+    border: 1px solid var(--border);
   }
 
   .nav-links.open li a {
@@ -772,7 +1100,7 @@ h3 {
   }
 
   .nav-links.open li a:hover {
-    background: rgba(124, 58, 237, 0.07);
+    background: var(--chip-bg);
   }
 }
 
@@ -800,6 +1128,27 @@ h3 {
 
   .work-card.featured {
     padding: 26px 22px;
+  }
+
+  .game-panel {
+    padding: 26px 18px;
+  }
+
+  .board {
+    grid-template-columns: repeat(3, 76px);
+    gap: 8px;
+  }
+
+  .cell {
+    width: 76px;
+    height: 76px;
+    font-size: 1.8rem;
+  }
+
+  .rps-btn {
+    width: 68px;
+    height: 68px;
+    font-size: 1.8rem;
   }
 }
 

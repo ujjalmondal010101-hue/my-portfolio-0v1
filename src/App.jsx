@@ -3,6 +3,7 @@ import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
 import Skills from './components/Skills.jsx'
 import Work from './components/Work.jsx'
+import Games from './components/Games.jsx'
 import Journey from './components/Journey.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
@@ -16,6 +17,7 @@ function App() {
         <About />
         <Skills />
         <Work />
+        <Games />
         <Journey />
         <Contact />
       </main>
