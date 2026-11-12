@@ -713,19 +713,6 @@ h3 {
 
 /* ── Mini Games ──────────────── */
 
-.games-wrap {
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.games-tabs {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 26px;
-}
-
 .games-tab {
   padding: 11px 24px;
   border-radius: 999px;
@@ -916,6 +903,385 @@ h3 {
 .reset-btn:hover {
   border-color: var(--violet);
   transform: translateY(-2px);
+}
+
+/* ── Games grid & cards ──────── */
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+}
+
+.game-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-7px) rotate(-1deg);
+  box-shadow: var(--shadow);
+}
+
+.game-card-emoji {
+  font-size: 2.4rem;
+  display: inline-block;
+}
+
+.game-card h3 {
+  font-size: 1.2rem;
+  margin: 12px 0 8px;
+}
+
+.game-card p {
+  color: var(--muted);
+  margin: 0 0 16px;
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.game-card-play {
+  font-weight: 700;
+  color: var(--accent-text);
+}
+
+/* ── Game pages ──────────────── */
+
+.games-page {
+  padding: 150px 0 80px;
+}
+
+.games-page .game-panel {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-flex;
+  font-weight: 600;
+  color: var(--accent-text);
+  margin-bottom: 22px;
+}
+
+.back-link:hover {
+  opacity: 0.8;
+}
+
+.game-hero {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.game-hero-emoji {
+  font-size: 3rem;
+  display: inline-block;
+}
+
+.game-hero h1 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 800;
+  margin-top: 6px;
+}
+
+.game-hero p {
+  color: var(--muted);
+  margin: 8px 0 0;
+}
+
+.more-games {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 34px;
+}
+
+.more-label {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.games-page-back {
+  text-align: center;
+  margin-top: 44px;
+}
+
+/* ── Archery ─────────────────── */
+
+.arch-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  color: var(--muted);
+  margin-bottom: 18px;
+  font-size: 0.95rem;
+}
+
+.arch-stats strong {
+  color: var(--ink);
+  font-size: 1.15rem;
+  margin-left: 4px;
+}
+
+.arch-target {
+  position: relative;
+  display: block;
+  width: min(300px, 78vw);
+  aspect-ratio: 1;
+  margin: 0 auto 18px;
+  border: none;
+  border-radius: 50%;
+  cursor: crosshair;
+  background: radial-gradient(
+    circle,
+    #fbbf24 0 12%,
+    #ef4444 12% 27%,
+    #f8fafc 27% 28.5%,
+    #3b82f6 28.5% 44%,
+    #f8fafc 44% 45.5%,
+    #1f2937 45.5% 61%,
+    #f8fafc 61% 62.5%,
+    #f1f5f9 62.5% 100%
+  );
+  box-shadow: var(--shadow);
+}
+
+.arch-target:disabled {
+  cursor: default;
+}
+
+.arch-crosshair {
+  position: absolute;
+  top: -4%;
+  bottom: -4%;
+  width: 3px;
+  background: var(--red);
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.arch-crosshair::before,
+.arch-crosshair::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 14px;
+  height: 3px;
+  background: var(--red);
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.arch-crosshair::before {
+  top: 8px;
+}
+
+.arch-crosshair::after {
+  bottom: 8px;
+}
+
+.arch-log {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.arch-chip {
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.arch-chip.gold {
+  background: rgba(251, 191, 36, 0.3);
+}
+
+/* ── Penalty shootout ────────── */
+
+.penalty-stage {
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.goal-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border: 8px solid #e2e8f0;
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(148, 163, 184, 0.4) 0 1.5px,
+      transparent 1.5px 15px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(148, 163, 184, 0.4) 0 1.5px,
+      transparent 1.5px 15px
+    ),
+    var(--card);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.zone-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.zone-btn {
+  background: transparent;
+  border: 1px dashed rgba(148, 163, 184, 0.5);
+  color: var(--muted);
+  opacity: 0.55;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.zone-btn:hover:enabled {
+  opacity: 1;
+  background: rgba(236, 72, 153, 0.12);
+}
+
+.zone-btn:disabled {
+  cursor: default;
+}
+
+.keeper,
+.ball {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.keeper {
+  font-size: 2.7rem;
+  transition: left 0.55s ease, top 0.55s ease, transform 0.55s ease;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+}
+
+.ball {
+  font-size: 1.9rem;
+  transition: left 0.6s cubic-bezier(0.2, 0.8, 0.4, 1),
+    top 0.6s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+.penalty-ground {
+  height: 52px;
+  border-radius: 0 0 16px 16px;
+  background: linear-gradient(180deg, #2fa757, #1b7a3e);
+  box-shadow: var(--shadow-soft);
+}
+
+.penalty-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 6px 0 4px;
+  font-size: 1.25rem;
+}
+
+/* ── Ludo race ───────────────── */
+
+.ludo-board {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  max-width: 440px;
+  margin: 20px auto;
+}
+
+.ludo-tile {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 2px;
+  min-width: 0;
+}
+
+.ludo-mark {
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1;
+}
+
+.ludo-tile.safe {
+  background: var(--tint-violet);
+}
+
+.ludo-tile.finish {
+  background: linear-gradient(
+    160deg,
+    rgba(251, 191, 36, 0.35),
+    rgba(249, 115, 22, 0.35)
+  );
+}
+
+.ludo-tokens {
+  display: flex;
+  gap: 3px;
+}
+
+.ludo-token {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  font-size: 0.62rem;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.ludo-token.you {
+  background: var(--pink);
+}
+
+.ludo-token.ujjal {
+  background: var(--violet);
+}
+
+.ludo-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.ludo-die {
+  font-size: 1.35rem;
+  font-weight: 700;
+  padding: 12px 20px;
+  border-radius: 16px;
+  background: var(--chip-bg);
+  min-width: 92px;
 }
 
 /* ── Journey timeline ────────── */

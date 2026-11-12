@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import ThemeToggle from './ThemeToggle.jsx'
 import { profile } from '../data.js'
+import { goToSection } from '../utils/scroll.js'
 
 const links = [
   { href: '#about', label: 'About' },
@@ -13,11 +15,30 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const navigate = useNavigate()
+
+  function go(href) {
+    setOpen(false)
+    goToSection(navigate, href)
+  }
+
+  function goHome() {
+    setOpen(false)
+    navigate('/')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   return (
     <header className="navbar">
       <nav className="container nav-inner">
-        <a href="#top" className="logo" onClick={() => setOpen(false)}>
+        <a
+          href="#/"
+          className="logo"
+          onClick={(e) => {
+            e.preventDefault()
+            goHome()
+          }}
+        >
           {profile.initials}<span>.</span>
         </a>
 
@@ -34,7 +55,13 @@ export default function Navbar() {
         <ul className={`nav-links ${open ? 'open' : ''}`}>
           {links.map((link) => (
             <li key={link.href}>
-              <a href={link.href} onClick={() => setOpen(false)}>
+              <a
+                href={link.href}
+                onClick={(e) => {
+                  e.preventDefault()
+                  go(link.href)
+                }}
+              >
                 {link.label}
               </a>
             </li>

@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom'
 import { profile } from '../data.js'
+import { goToSection } from '../utils/scroll.js'
 
 const chips = [
   { emoji: '🎬', label: 'Creator' },
@@ -8,6 +10,8 @@ const chips = [
 ]
 
 export default function Hero() {
+  const navigate = useNavigate()
+
   return (
     <section className="hero" id="top">
       <div className="container hero-grid">
@@ -25,9 +29,13 @@ export default function Hero() {
             >
               🎬 Watch my videos
             </a>
-            <a className="btn btn-ghost" href="#contact">
+            <button
+              type="button"
+              className="btn btn-ghost"
+              onClick={() => goToSection(navigate, '#contact')}
+            >
               Get in touch
-            </a>
+            </button>
           </div>
         </div>
 
