@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getAnswer, QUICK_QUESTIONS } from '../assistant/knowledge.js'
 
 const WELCOME =
-  "Hi there! 👋 I'm UM Assistant — I know everything about Ujjal. Ask me about his YouTube channel, writing, football, education, or how to reach him!"
+  "Hi there! 👋 I'm UM Assistant — I know everything about Ujjal. Ask me about his YouTube channel, writing, football, education, how to reach him, or how to leave an opinion!"
 
 export default function ChatBot() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([{ from: 'bot', text: WELCOME }])
   const [input, setInput] = useState('')
   const [typing, setTyping] = useState(false)
+  const navigate = useNavigate()
   const bodyRef = useRef(null)
   const timerRef = useRef(null)
   const inputRef = useRef(null)
@@ -23,6 +25,14 @@ export default function ChatBot() {
   }, [open])
 
   useEffect(() => () => clearTimeout(timerRef.current), [])
+
+  useEffect(() => {
+    function openChat() {
+      setOpen(true)
+    }
+    window.addEventListener('um-open-chat', openChat)
+    return () => window.removeEventListener('um-open-chat', openChat)
+  }, [])
 
   function send(text) {
     const clean = text.trim()
@@ -82,6 +92,17 @@ export default function ChatBot() {
               </div>
             )}
           </div>
+
+          <button
+            type="button"
+            className="chat-opinion"
+            onClick={() => {
+              setOpen(false)
+              navigate('/opinions')
+            }}
+          >
+            ✍️ Leave an opinion for Ujjal <span aria-hidden="true">→</span>
+          </button>
 
           <div className="chat-chips">
             {QUICK_QUESTIONS.map((question) => (

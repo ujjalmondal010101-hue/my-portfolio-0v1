@@ -34,6 +34,13 @@ export const profile = {
   ],
 }
 
+// ── Owner area ───────────────────────────────────────────────
+// PIN for the private "Visitors' Opinions" inbox at /#/inbox.
+// Change it to any number you like — and keep it to yourself.
+export const owner = {
+  pin: '19705',
+}
+
 // About section paragraphs
 export const about = {
   paragraphs: [

@@ -11,6 +11,7 @@ const links = [
   { href: '#work', label: 'My Work' },
   { href: '#games', label: 'Games' },
   { href: '#journey', label: 'Journey' },
+  { href: '#opinions', label: 'Opinions' },
   { href: '#contact', label: 'Contact' },
 ]
 

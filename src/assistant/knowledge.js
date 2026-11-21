@@ -9,6 +9,7 @@ export const QUICK_QUESTIONS = [
   'What does he write?',
   'Can I hire him?',
   'What games can I play?',
+  'How do I leave an opinion?',
 ]
 
 const ANSWERS = {
@@ -39,6 +40,12 @@ const ANSWERS = {
     'Right now YouTube is live: youtube.com/@OishikAndFriendsConnection 🎬. Instagram and Facebook are coming soon — check back later!',
   website:
     'This portfolio shows Ujjal\'s world — videos, writing, football and games 🎮. It\'s built with React + Vite, and even the games are hand-coded. Fancy, right? 😄',
+  opinion:
+    '💬 I\'d love to hear from you! Head to the Visitors\' Opinions section — or tap the “✍️ Leave an opinion” button just below this chat. You can write a note, give a star rating and attach a file. Nothing you send is published on the site, and only Ujjal can open it 🔒',
+  upload:
+    '📎 Yes, you can attach a file to your opinion — a photo, drawing, PDF or document up to 8 MB. It never goes to a public server, so Ujjal is the only person who opens it. Tap “✍️ Leave an opinion” below to try it.',
+  owner:
+    '🔐 That\'s Ujjal\'s private inbox — where visitors\' notes and files reach him. It sits behind a PIN, so only he can open it. If you\'re a visitor, just fill in the opinion form and he\'ll get your message!',
   thanks:
     'Anytime! 😄 If you want to say hi to the real Ujjal, WhatsApp him at +91 62904 19705.',
   bye:
@@ -58,6 +65,9 @@ const INTENTS = [
   { id: 'hire', keywords: ['hire', 'collab', 'collaboration', 'collaborate', 'business', 'sponsor', 'sponsorship', 'work with', 'booking', 'book', 'project'] },
   { id: 'location', keywords: ['where', 'live', 'lives', 'location', 'city', 'kolkata', 'based'] },
   { id: 'games', keywords: ['game', 'games', 'gaming', 'archery', 'penalty', 'ludo', 'tic tac toe', 'rock paper scissors', 'mini game', 'play'] },
+  { id: 'opinion', keywords: ['opinion', 'opinions', 'feedback', 'review', 'reviews', 'suggest', 'suggestion', 'suggestions', 'guestbook', 'comment', 'comments', 'testimonial', 'rate', 'rating', 'stars'] },
+  { id: 'upload', keywords: ['upload', 'file', 'files', 'attach', 'attachment', 'attached', 'photo', 'picture', 'pdf', 'document', 'drop'] },
+  { id: 'owner', keywords: ['inbox', 'owner', 'admin', 'private area', 'pin', 'password', 'see the files', 'see files', 'my inbox'] },
   { id: 'resume', keywords: ['resume', 'cv', 'curriculum', 'download'] },
   { id: 'socials', keywords: ['instagram', 'insta', 'facebook', 'social', 'socials', 'twitter'] },
   { id: 'website', keywords: ['website', 'site', 'portfolio', 'made this', 'design'] },

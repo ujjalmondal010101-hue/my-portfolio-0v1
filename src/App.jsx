@@ -7,11 +7,14 @@ import Skills from './components/Skills.jsx'
 import Work from './components/Work.jsx'
 import Games from './components/Games.jsx'
 import Journey from './components/Journey.jsx'
+import Opinions from './components/Opinions.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
 import ChatBot from './components/ChatBot.jsx'
 import GamesMenu from './pages/GamesMenu.jsx'
 import GamePage from './pages/GamePage.jsx'
+import OpinionsPage from './pages/OpinionsPage.jsx'
+import Inbox from './pages/Inbox.jsx'
 import { useReveal } from './hooks/useReveal.js'
 
 function Home() {
@@ -25,6 +28,7 @@ function Home() {
       <Work />
       <Games />
       <Journey />
+      <Opinions />
       <Contact />
     </main>
   )
@@ -43,6 +47,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/games" element={<GamesMenu />} />
         <Route path="/games/:gameId" element={<GamePage />} />
+        <Route path="/opinions" element={<OpinionsPage />} />
+        <Route path="/inbox" element={<Inbox />} />
         <Route path="*" element={<Home />} />
       </Routes>
       <Footer />
