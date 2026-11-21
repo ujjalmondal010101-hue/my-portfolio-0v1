@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ujjal Mondal — content creator, writer, actor and footballer from Kolkata. Watch my YouTube videos, read my stories and get in touch."
+    />
+    <title>Ujjal Mondal — Content Creator & Writer</title>
+    <script>
+      // Apply saved theme + customization before first paint
+      ;(function () {
+        try {
+          var s = JSON.parse(localStorage.getItem('um-settings') || '{}')
+          var t = s.theme || localStorage.getItem('theme')
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light'
+          }
+          document.documentElement.dataset.theme = t
+          document.documentElement.dataset.accent = s.accent || 'violet'
+          if (s.motion === false) {
+            document.documentElement.classList.add('motion-off')
+          }
+          if (s.bigText) {
+            document.documentElement.classList.add('big-text')
+          }
+        } catch (e) {}
+      })()
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="./assets/index-PhVeZsCU.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DQ_gJpRk.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
