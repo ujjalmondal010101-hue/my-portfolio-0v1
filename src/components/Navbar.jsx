@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ThemeToggle from './ThemeToggle.jsx'
+import Customizer from './Customizer.jsx'
 import { profile } from '../data.js'
 import { goToSection } from '../utils/scroll.js'
 
@@ -68,6 +69,9 @@ export default function Navbar() {
           ))}
           <li>
             <ThemeToggle />
+          </li>
+          <li>
+            <Customizer />
           </li>
           <li>
             <a

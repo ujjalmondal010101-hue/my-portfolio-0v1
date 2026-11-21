@@ -4,7 +4,7 @@ export default function Work() {
   return (
     <section className="section" id="work">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal">
           <span className="hand">things I&apos;ve made &amp; love doing</span>
           <h2>
             My <span className="grad-text">Work</span>
@@ -12,10 +12,11 @@ export default function Work() {
         </div>
 
         <div className="work-grid">
-          {works.map((work) => (
+          {works.map((work, i) => (
             <article
               key={work.title}
-              className={`work-card ${work.featured ? 'featured' : ''}`}
+              className={`work-card reveal ${work.featured ? 'featured' : ''}`}
+              style={{ '--reveal-delay': `${i * 80}ms` }}
             >
               <span className="work-tag">{work.tag}</span>
               <span className="work-emoji" aria-hidden="true">

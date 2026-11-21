@@ -6,7 +6,7 @@ export default function Games() {
   return (
     <section className="section" id="games">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal">
           <span className="hand">challenge me — if you dare 😏</span>
           <h2>
             Mini <span className="grad-text">Games</span>
@@ -19,8 +19,8 @@ export default function Games() {
         </div>
 
         <div className="games-grid">
-          {GAMES.map((game) => (
-            <GameCard key={game.id} game={game} />
+          {GAMES.map((game, i) => (
+            <GameCard key={game.id} game={game} index={i} />
           ))}
         </div>
 

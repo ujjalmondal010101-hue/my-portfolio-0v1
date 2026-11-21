@@ -10,16 +10,24 @@
     />
     <title>Ujjal Mondal — Content Creator & Writer</title>
     <script>
-      // Apply saved theme before first paint to avoid a flash of the wrong mode
+      // Apply saved theme + customization before first paint
       ;(function () {
         try {
-          var t = localStorage.getItem('theme')
+          var s = JSON.parse(localStorage.getItem('um-settings') || '{}')
+          var t = s.theme || localStorage.getItem('theme')
           if (t !== 'light' && t !== 'dark') {
             t = window.matchMedia('(prefers-color-scheme: dark)').matches
               ? 'dark'
               : 'light'
           }
           document.documentElement.dataset.theme = t
+          document.documentElement.dataset.accent = s.accent || 'violet'
+          if (s.motion === false) {
+            document.documentElement.classList.add('motion-off')
+          }
+          if (s.bigText) {
+            document.documentElement.classList.add('big-text')
+          }
         } catch (e) {}
       })()
     </script>

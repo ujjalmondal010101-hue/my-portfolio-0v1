@@ -4,7 +4,7 @@ export default function Skills() {
   return (
     <section className="section section-tint" id="skills">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal">
           <span className="hand">what I bring to the table</span>
           <h2>
             My <span className="grad-text">Skills</span>
@@ -12,8 +12,12 @@ export default function Skills() {
         </div>
 
         <div className="skills-grid">
-          {skills.map((skill) => (
-            <article key={skill.title} className={`skill-card tone-${skill.tone}`}>
+          {skills.map((skill, i) => (
+            <article
+              key={skill.title}
+              className={`skill-card reveal tone-${skill.tone}`}
+              style={{ '--reveal-delay': `${i * 80}ms` }}
+            >
               <span className="skill-emoji" aria-hidden="true">
                 {skill.emoji}
               </span>

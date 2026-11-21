@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <section className="section" id="contact">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal">
           <span className="hand">say hi, I don&apos;t bite</span>
           <h2>
             Get in <span className="grad-text">Touch</span>
@@ -12,14 +12,15 @@ export default function Contact() {
         </div>
 
         <div className="contact-grid">
-          <a className="contact-card" href={`mailto:${profile.email}`}>
+          <a className="contact-card reveal" href={`mailto:${profile.email}`}>
             <span className="contact-emoji" aria-hidden="true">📧</span>
             <h3>Email</h3>
             <p>{profile.email}</p>
           </a>
 
           <a
-            className="contact-card"
+            className="contact-card reveal"
+            style={{ '--reveal-delay': '90ms' }}
             href={profile.whatsapp}
             target="_blank"
             rel="noreferrer"
@@ -30,7 +31,8 @@ export default function Contact() {
           </a>
 
           <a
-            className="contact-card"
+            className="contact-card reveal"
+            style={{ '--reveal-delay': '180ms' }}
             href={profile.youtube}
             target="_blank"
             rel="noreferrer"
@@ -41,7 +43,7 @@ export default function Contact() {
           </a>
         </div>
 
-        <div className="contact-cta">
+        <div className="contact-cta reveal">
           <a
             className="btn btn-primary"
             href={profile.whatsapp}

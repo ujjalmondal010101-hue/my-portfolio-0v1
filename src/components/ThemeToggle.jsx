@@ -1,20 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useSettings } from '../context/Settings.jsx'
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('theme')
-    if (saved === 'light' || saved === 'dark') return saved
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light'
-  })
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme
-    localStorage.setItem('theme', theme)
-  }, [theme])
-
-  const isDark = theme === 'dark'
+  const { settings, update } = useSettings()
+  const isDark = settings.theme === 'dark'
 
   return (
     <button
@@ -24,7 +12,7 @@ export default function ThemeToggle() {
       aria-checked={isDark}
       aria-label="Toggle dark mode"
       title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      onClick={() => update({ theme: isDark ? 'light' : 'dark' })}
     >
       <span className="theme-knob" aria-hidden="true">
         {isDark ? '🌙' : '☀️'}

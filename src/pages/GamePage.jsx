@@ -2,10 +2,13 @@ import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { GAMES } from '../games/registry.js'
 import GameCard from '../components/GameCard.jsx'
+import { useReveal } from '../hooks/useReveal.js'
 
 export default function GamePage() {
   const { gameId } = useParams()
   const game = GAMES.find((g) => g.id === gameId)
+
+  useReveal()
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -16,7 +19,7 @@ export default function GamePage() {
       <main>
         <section className="games-page">
           <div className="container">
-            <div className="section-head">
+            <div className="section-head reveal">
               <span className="hand">hmm…</span>
               <h2>
                 Game <span className="grad-text">not found</span> 🤔
@@ -26,8 +29,8 @@ export default function GamePage() {
               </p>
             </div>
             <div className="games-grid">
-              {GAMES.map((g) => (
-                <GameCard key={g.id} game={g} />
+              {GAMES.map((g, i) => (
+                <GameCard key={g.id} game={g} index={i} />
               ))}
             </div>
           </div>
@@ -43,11 +46,11 @@ export default function GamePage() {
     <main>
       <section className="games-page">
         <div className="container game-page-inner">
-          <Link to="/games" className="back-link">
+          <Link to="/games" className="back-link reveal">
             ◀ All games
           </Link>
 
-          <div className="game-hero">
+          <div className="game-hero reveal">
             <span className="game-hero-emoji" aria-hidden="true">
               {game.emoji}
             </span>
@@ -55,11 +58,11 @@ export default function GamePage() {
             <p>{game.tagline}</p>
           </div>
 
-          <div className="game-panel">
+          <div className="game-panel reveal" style={{ '--reveal-delay': '120ms' }}>
             <Game />
           </div>
 
-          <div className="more-games">
+          <div className="more-games reveal">
             <span className="more-label">More games:</span>
             {others.map((g) => (
               <Link key={g.id} to={`/games/${g.id}`} className="games-tab">
