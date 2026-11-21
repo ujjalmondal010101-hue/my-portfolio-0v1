@@ -6,6 +6,7 @@ import {
   formatBytes,
   saveOpinion,
 } from '../lib/opinions.js'
+import { sendOpinion } from '../lib/backend.js'
 import { useReveal } from '../hooks/useReveal.js'
 
 const EMPTY = { name: '', email: '', rating: 0, message: '' }
@@ -120,7 +121,15 @@ export default function OpinionsPage() {
     setBusy(true)
     try {
       const saved = await saveOpinion({ ...form, file })
-      setResult(saved)
+      const delivery = await sendOpinion({
+        name: form.name,
+        email: form.email,
+        rating: form.rating,
+        message: form.message,
+        file,
+        page: `${window.location.origin}${window.location.pathname}#/opinions`,
+      })
+      setResult({ ...saved, delivery })
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (error) {
       setErrors({ form: error?.message || 'Something went wrong. Please try again.' })
@@ -151,6 +160,7 @@ export default function OpinionsPage() {
   }
 
   const opinion = result?.opinion
+  const delivered = result?.delivery?.status === 'sent'
   const shareText = opinion ? buildShareText(opinion) : ''
   const whatsappHref = opinion
     ? `${profile.whatsapp}?text=${encodeURIComponent(shareText)}`
@@ -331,10 +341,10 @@ export default function OpinionsPage() {
               </div>
 
               <p className="privacy-note">
-                🔒 <b>How it works:</b> your note is saved in this browser so it
-                isn&apos;t lost, and the next step lets you send it straight to
-                Ujjal on WhatsApp or email. Files are never uploaded to a public
-                server.
+                🔒 <b>How it works:</b> your note and file are emailed straight to
+                Ujjal&apos;s <b>private inbox</b> — only he can open them. Nothing is
+                ever published on this website. A copy is also saved in this
+                browser so your words aren&apos;t lost.
               </p>
             </form>
           )}
@@ -342,45 +352,69 @@ export default function OpinionsPage() {
           {opinion && (
             <div className="opinion-success reveal">
               <span className="success-emoji" aria-hidden="true">
-                🎉
+                {delivered ? '🎉' : '💌'}
               </span>
               <h2>Thank you, {opinion.name}!</h2>
-              <p>
-                Your opinion is saved on this device. Now send it to Ujjal so he
-                actually sees it — tap a button below.
-              </p>
 
-              {opinion.file && (
-                <p className="success-warn">
-                  📎 You attached <b>{opinion.file.name}</b>. Browsers can&apos;t
-                  attach files automatically, so please attach it again inside
-                  WhatsApp or your email app before you hit send.
-                </p>
+              {delivered ? (
+                <>
+                  <p className="success-delivered">
+                    ✅ Your opinion went straight to Ujjal&apos;s private inbox
+                    {opinion.file ? ` along with ${opinion.file.name}` : ''}. He
+                    will read it soon — nothing is shown on the website.
+                  </p>
+                  <p className="success-soft">
+                    A copy is saved in this browser, so your words aren&apos;t
+                    lost.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p>
+                    Your opinion is saved in this browser. Please send it directly
+                    too — it&apos;s just one tap:
+                  </p>
+
+                  {result?.delivery?.status === 'pending' ? (
+                    <p className="success-warn">
+                      ⚠️ The owner&apos;s inbox is still finishing its one-time
+                      activation, so this copy can&apos;t be delivered
+                      automatically yet. Use a button below instead.
+                    </p>
+                  ) : (
+                    <p className="success-warn">
+                      ⚠️{' '}
+                      {result?.delivery?.message ||
+                        'The server could not be reached.'}{' '}
+                      Use a button below instead.
+                    </p>
+                  )}
+
+                  {opinion.file && (
+                    <p className="success-warn">
+                      📎 You attached <b>{opinion.file.name}</b> — please attach
+                      it again inside WhatsApp or your email app before sending.
+                    </p>
+                  )}
+
+                  <div className="success-share">
+                    <a
+                      className="btn btn-primary"
+                      href={whatsappHref}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      💬 Send on WhatsApp
+                    </a>
+                    <a className="btn btn-ghost" href={mailHref}>
+                      📧 Send by email
+                    </a>
+                    <button type="button" className="btn btn-ghost" onClick={copyMessage}>
+                      {copied ? '✅ Copied!' : '📋 Copy message'}
+                    </button>
+                  </div>
+                </>
               )}
-
-              {result && !result.fileSaved && result.fileError && (
-                <p className="success-warn">
-                  ⚠️ The file could not be stored in this browser, but you can
-                  still attach it in WhatsApp/email yourself.
-                </p>
-              )}
-
-              <div className="success-share">
-                <a
-                  className="btn btn-primary"
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  💬 Send on WhatsApp
-                </a>
-                <a className="btn btn-ghost" href={mailHref}>
-                  📧 Send by email
-                </a>
-                <button type="button" className="btn btn-ghost" onClick={copyMessage}>
-                  {copied ? '✅ Copied!' : '📋 Copy message'}
-                </button>
-              </div>
 
               <div className="success-recap">
                 <div className="success-stars" aria-label={`${opinion.rating} out of 5 stars`}>

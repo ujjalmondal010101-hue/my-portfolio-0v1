@@ -2719,6 +2719,22 @@ html.motion-off .reveal {
   text-align: left;
 }
 
+.success-delivered {
+  display: block;
+  padding: 14px 20px;
+  border-radius: 16px;
+  background: var(--tint-green);
+  color: var(--text-soft);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin: 12px auto 0;
+  max-width: 54ch;
+}
+
+.success-soft {
+  font-size: 0.85rem;
+}
+
 .success-share {
   display: flex;
   flex-wrap: wrap;

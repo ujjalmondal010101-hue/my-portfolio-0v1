@@ -15,7 +15,7 @@ export default function Opinions() {
           </h2>
           <p className="section-sub">
             Watched a video? Read a poem? Tell me what you think — you can even
-            attach a file. <strong>Nothing you send is shown publicly.</strong>
+            attach a file. <strong>It goes straight to my private inbox.</strong>
           </p>
         </div>
 
@@ -61,8 +61,8 @@ export default function Opinions() {
             <li>
               <span aria-hidden="true">🔒</span>
               <div>
-                <b>Private by default</b>
-                <p>Your note and upload never appear on the website.</p>
+                <b>Owner-only delivery</b>
+                <p>Your note + file go straight to Ujjal — never published.</p>
               </div>
             </li>
           </ul>

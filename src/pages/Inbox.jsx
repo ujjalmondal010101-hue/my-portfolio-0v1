@@ -187,10 +187,10 @@ export default function Inbox() {
           </div>
 
           <div className="inbox-note">
-            <b>How this works:</b> opinions land here when someone submits the form
-            on this browser. Files are stored privately in this browser — never on
-            a public server. To receive notes from visitors on other devices, send
-            them your WhatsApp link from the form, or connect a free backend.
+            <b>How this works:</b> every opinion is emailed straight to your inbox
+            with the file attached — that is the main way visitors reach you, and
+            only you can open that mail. This page keeps a private backup of the
+            notes and files saved in this browser.
           </div>
 
           {notice && <div className="inbox-toast">{notice}</div>}

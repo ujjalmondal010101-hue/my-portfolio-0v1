@@ -41,11 +41,11 @@ const ANSWERS = {
   website:
     'This portfolio shows Ujjal\'s world — videos, writing, football and games 🎮. It\'s built with React + Vite, and even the games are hand-coded. Fancy, right? 😄',
   opinion:
-    '💬 I\'d love to hear from you! Head to the Visitors\' Opinions section — or tap the “✍️ Leave an opinion” button just below this chat. You can write a note, give a star rating and attach a file. Nothing you send is published on the site, and only Ujjal can open it 🔒',
+    '💬 I\'d love to hear from you! Head to the Visitors\' Opinions section — or tap the “✍️ Leave an opinion” button just below this chat. You can write a note, give a star rating and attach a file. It goes straight to Ujjal\'s private inbox, and nothing is ever published on the site 🔒',
   upload:
-    '📎 Yes, you can attach a file to your opinion — a photo, drawing, PDF or document up to 8 MB. It never goes to a public server, so Ujjal is the only person who opens it. Tap “✍️ Leave an opinion” below to try it.',
+    '📎 Yes, you can attach a file to your opinion — a photo, drawing, PDF or document up to 8 MB. It is sent straight to Ujjal\'s private inbox as an attachment, and it never appears on the website. Tap “✍️ Leave an opinion” below to try it.',
   owner:
-    '🔐 That\'s Ujjal\'s private inbox — where visitors\' notes and files reach him. It sits behind a PIN, so only he can open it. If you\'re a visitor, just fill in the opinion form and he\'ll get your message!',
+    '🔐 That\'s Ujjal\'s private inbox — where visitors\' notes and files reach him, and where you can open them only with his PIN. If you\'re a visitor, just fill in the opinion form and he\'ll get your message and file automatically.',
   thanks:
     'Anytime! 😄 If you want to say hi to the real Ujjal, WhatsApp him at +91 62904 19705.',
   bye:

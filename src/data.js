@@ -39,6 +39,13 @@ export const profile = {
 // Change it to any number you like — and keep it to yourself.
 export const owner = {
   pin: '19705',
+
+  // Where visitor opinions + uploaded files are emailed.
+  // Every submission is delivered to this inbox automatically.
+  opinionsEmail: 'ujjalmondal010101@gmail.com',
+
+  // Set to 'off' if you ever want to pause email delivery.
+  opinionsBackend: 'formsubmit',
 }
 
 // About section paragraphs
